@@ -1,7 +1,7 @@
 # !/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Get OOP Infomation 获取对象信息
+# Get OOP Infomation 获取对象信息 新年新气象
 
 import types
 
