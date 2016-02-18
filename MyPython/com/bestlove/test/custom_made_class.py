@@ -67,6 +67,62 @@ class Fib(object):
 '''
 
 
+# __getattr__
+
+
+class Student2(object):
+
+    def __init__(self):
+        self.name = '张三丰'
+
+    def __getattr__(self, item):
+        if item == 'score':
+            return 88
+
+        if item == 'age':  # 返回函数
+            return lambda: 23
+
+        raise AttributeError('\'Student\' object has no attribute \'%s\'' % item)
+
+        '''
+            实际上可以把一个类的所有属性和方法调用全部动态化处理了，不需要任何特殊手段。
+            而Java是静态类型的语言，所以用Java写的项目易于维护，而Python则不宜维护
+        '''
+
+
+# 利用完全动态的__getattr__,可以写出一个链式调用
+
+class Chain(object):
+
+    def __init__(self, path=''):
+        self._path = path
+
+    def __getattr__(self, path):
+        return Chain('%s/%s' % (self._path, path))
+
+    def __str__(self):
+        return self._path
+
+    __repr__ = __str__
+
+
+# __call__
+
+'''
+    一个对象实例可以有自己的属性和方法，当我们调用实例方法时，我们用instance.method()来调用。
+'''
+
+
+class Student3(object):
+
+    def __init__(self, name):
+        self.name = name
+
+    def __call__(self):
+        print('My name is %s.' % self.name)
+
+
+
 def my_test():
     print(Student('家教机'))
     s = Student('郑凯文')
@@ -86,6 +142,36 @@ def my_test():
         总之，通过上面的方法，我们自己定义的类表现的和Python自带的list, tuple, dict没什么区别，
         这完全归功于动态语言的“鸭子类型”，不需要强制继承某个接口
     '''
+
+    s = Student2()
+    print(s.name)
+    print(s.score)
+    print(s.age())  # 函数调用
+    # print(s.addr)  # 没有的属性会抛出异常
+    print(Chain().status.user.timeline.list)
+    s2 = Student3('柳如是')
+    s2()  # self参数不要传入
+
+    '''
+    __call__()还可以定义参数。对实例进行直接调用就好比对一个函数进行调用一样，
+    所以你完全可以把对象看出函数，把函数看成对象，因为这两者之间本来就没啥根本区别。
+
+    如果你把对象看出函数，那么函数本身其实也可以再运行期动态创建出来，因为类的实例都是
+    运行期创建出来的，这么一来，我们就模糊了对象和函数的界限。
+
+    我们要判断一个对象是否能被调用，能被调用的对象就是一个Callable对象，比如函数和我们
+    上面定义的带有__call__()的实例
+    '''
+    # 通过callable()函数，我们就可以判断一个对象是否是“可调用”对象
+    print(callable(Student3))
+    print(callable(max))
+    print(callable([1, 2, 4, 5]))
+    print(callable(None))
+    print(callable('str'))
+    print(callable(str))
+
+
+
 
 def main():
     my_test()
