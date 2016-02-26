@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import shutil
 
 '''
     CentOS 下运行结果
@@ -19,6 +20,8 @@ import os
 '''
 
 
+
+
 def shutil_test():
     # 利用Python的特性来过滤文件，列出当前目录下所有目录，只需一行代码
     d = [x for x in os.listdir('.') if os.path.isdir(x)]
@@ -26,6 +29,8 @@ def shutil_test():
     # 要列出所有.py文件，也只需一行代码
     f = [x for x in os.listdir('.') if os.path.isfile(x) and os.path.splitext(x)[1]=='.py']
     print(f)
+    # 拷贝文件 以lambda.py为例
+    shutil.copyfile('lambda.py', 'lambda.txt')
 
 
 
