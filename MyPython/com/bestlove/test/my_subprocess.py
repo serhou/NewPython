@@ -3,7 +3,7 @@
 
 import subprocess
 
-# 这里的命令依旧只能运行在Linux,Unix等系统上，Windows 上支持
+# 这里的命令依旧只能运行在Linux,Unix等系统上，Windows 不支持
 # 很多时候，子进程并不是自身，而是外部进程，我们创建子进程后，还要控制子进程的输入和输出
 # subprocess 模块可以让我们非常方便的启动一个子进程，然后控制其输入和输出
 
