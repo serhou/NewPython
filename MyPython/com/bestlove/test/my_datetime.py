@@ -1,11 +1,27 @@
 # !/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
+import re
 from datetime import datetime, timedelta, timezone
 '''
     datetime是Python处理日期和时间的标准库
     注意到datetime时模块，datetime模块还包含一个datetime类。
 '''
+
+
+def to_timestamp(dt_str, tz_str):
+    d_time = datetime.strptime(dt_str, '%Y-%m-%d %H:%M:%S')
+    t_zone = re.match(r'^UTC(\+|-)([0][0-9]|[1][0-4]|[0-9]):00$', tz_str)
+    print(d_time, t_zone.group(1))
+    hour = int(t_zone.group(1)+t_zone.group(2))
+    d_t = d_time.replace(tzinfo=timezone(timedelta(hours=hour)))  # 转化为带时区的时间
+    print(d_time.timestamp())
+    print(d_t, type(d_t))
+    d_utc = d_t.astimezone(timezone(timedelta(hours=0)))
+    print(d_utc)
+    print(d_utc.timestamp())
+
+
 
 
 def get_cur_time():
@@ -91,10 +107,10 @@ def get_every_time():
     '''
 
 
-
 def my_test():
     get_cur_time()
     get_every_time()
+    to_timestamp('2016-02-29 10:23:56', 'UTC+08:00')
 
 
 def main():
