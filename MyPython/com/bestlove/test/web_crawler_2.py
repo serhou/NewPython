@@ -52,7 +52,7 @@ def test_ip():
 
 
 def my_test():
-    # get_pro()
+    get_pro()
     test_ip()
 
 def main():
