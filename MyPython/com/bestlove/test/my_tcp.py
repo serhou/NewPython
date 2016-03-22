@@ -27,6 +27,7 @@ def test_socket():
     # 把接收的数据写入文件
     with open('sina.html', 'wb') as f:
         f.write(html)
+    f.close()
 
 
 
