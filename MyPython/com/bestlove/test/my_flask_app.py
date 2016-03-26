@@ -4,6 +4,8 @@
 from flask import Flask
 from flask import request
 
+# Python 的装饰器类似于Java的注解
+
 my_flask_app = Flask(__name__)
 
 # 访问网址http://127.0.0.1:5000/
