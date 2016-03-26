@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+</head>
+<body>
+    {% if message %}
+        <p style="color:red">{{ message.decode('utf-8') }}</p>
+    {% endif %}
+    <form action="/signin" method="post">
+        <legend>请登录：</legend>
+        <p><input name="username" placeholder="用户名" value="{{ username }}"></p>
+        <p><input name="password" placeholder="密  码" type="password"></p>
+        <p><button type="submit">登录</button></p>
+    </form>
+</body>
+</html>
