@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python
+# coding=utf-8
 from __future__ import print_function
 
 import os
@@ -450,7 +450,6 @@ def main():
 				NickName += '(%s)' % Member['RemarkName']
 			resultNames.append(NickName.encode('utf-8'))
 
-	print('看看是啥：',resultNames)
 	print('\n---------- 被删除的好友列表 ----------')
 	# 过滤emoji
 	resultNames=list(map(lambda x:re.sub(r'<span.+/span>','',x),resultNames))
@@ -459,7 +458,6 @@ def main():
 
 # windows下编码问题修复
 # http://blog.csdn.net/heyuxuanzee/article/details/8442718
-'''
 class UnicodeStreamFilter:  
 	def __init__(self, target):  
 		self.target = target  
@@ -467,11 +465,11 @@ class UnicodeStreamFilter:
 		self.errors = 'replace'  
 		self.encode_to = self.target.encoding  
 	def write(self, s):  
-		#if type(s) == str:  
-		#	s = s.decode('utf-8')  
-		#s = s.encode(self.encode_to, self.errors).decode(self.encode_to)  
+		if type(s) == str:  
+			s = s.decode('utf-8')  
+		s = s.encode(self.encode_to, self.errors).decode(self.encode_to)  
 		self.target.write(s)  
-'''
+		  
 if sys.stdout.encoding == 'cp936':  
 	sys.stdout = UnicodeStreamFilter(sys.stdout)
 
